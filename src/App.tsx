@@ -10,6 +10,8 @@ import ProtectedRoute from "@/routes/ProtectedRoute";
 import Menu from "@/pages/Menu";
 import RoleRoute from "@/routes/RoleRoute";
 import Forbidden from "@/pages/ErrorPage/Forbidden";
+import NotFound from "./pages/ErrorPage/NotFound";
+import User from "./pages/Users/User";
 
 function App() {
   const { user, authLoading } = useAuth();
@@ -31,6 +33,15 @@ function App() {
               <Route index path="/" element={<Dashboard />} />
 
               <Route
+                path="/users"
+                element={
+                  <RoleRoute roles={["super-admin", "admin"]}>
+                    <User />
+                  </RoleRoute>
+                }
+              />
+
+              <Route
                 path="/menu"
                 element={
                   <RoleRoute roles={["admin"]}>
@@ -39,6 +50,8 @@ function App() {
                 }
               />
             </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* Guest */}

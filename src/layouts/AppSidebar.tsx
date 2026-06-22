@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { useSidebar } from "@/contexts/SidebarContext";
-import { Ellipsis, LayoutDashboard, SquareMenu } from "lucide-react";
+import { Ellipsis, LayoutDashboard, SquareMenu, Users } from "lucide-react";
 
 type NavItem = {
   name: string;
@@ -27,6 +27,11 @@ const othersItems: NavItem[] = [
   //     { name: "Bar Chart", path: "/bar-chart", pro: false },
   //   ],
   // },
+  {
+    icon: <Users />,
+    name: "User",
+    path: "/users",
+  },
   {
     icon: <SquareMenu />,
     name: "Menu",
