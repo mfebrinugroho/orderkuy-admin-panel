@@ -1,4 +1,6 @@
 import type { ApiResponse } from "@/types/api";
+import type { AuthRole } from "@/types/role";
+import type { AuthPermission } from "@/types/permission";
 
 export interface Login {
   email: string;
@@ -18,11 +20,6 @@ export interface User {
   email: string;
 }
 
-export interface Role {
-  slug: string;
-  name: string;
-}
-
 export interface UserDetail extends User {
   email_verified_at: string | null;
   created_at: string;
@@ -30,7 +27,8 @@ export interface UserDetail extends User {
 }
 
 export interface UserAuth extends User {
-  role: Role;
+  role: AuthRole;
+  permission: AuthPermission;
 }
 
 export interface AuthResponse<T> extends ApiResponse<T> {

@@ -4,8 +4,11 @@ import { Link } from "react-router";
 interface ComponentCardProps {
   title: string;
   children: React.ReactNode;
-  className?: string; // Additional custom classes for styling
-  desc?: string; // Description text
+  className?: string;
+  desc?: string;
+  addButton?: boolean;
+  addUrl?: string;
+  addTitle?: string;
 }
 
 const ComponentCard = ({
@@ -13,6 +16,9 @@ const ComponentCard = ({
   children,
   className = "",
   desc = "",
+  addButton = false,
+  addUrl = "/",
+  addTitle = "Add Product",
 }: ComponentCardProps) => {
   return (
     <div
@@ -34,29 +40,31 @@ const ComponentCard = ({
           )}
         </div>
 
-        <div className="flex gap-3">
-          <Link
-            to="/"
-            className="bg-brand-500 shadow-theme-xs hover:bg-brand-600 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-white transition"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
+        {addButton && (
+          <div className="flex gap-3">
+            <Link
+              to={addUrl}
+              className="bg-brand-500 shadow-theme-xs hover:bg-brand-600 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-white transition"
             >
-              <path
-                d="M5 10.0002H15.0006M10.0002 5V15.0006"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            Add Product
-          </Link>
-        </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M5 10.0002H15.0006M10.0002 5V15.0006"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {addTitle}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Card Body */}

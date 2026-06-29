@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { useSidebar } from "@/contexts/SidebarContext";
-import { Ellipsis, LayoutDashboard, SquareMenu, Users } from "lucide-react";
+import {
+  ChevronDownIcon,
+  Ellipsis,
+  LayoutDashboard,
+  SquareMenu,
+  Users,
+} from "lucide-react";
 
 type NavItem = {
   name: string;

@@ -10,8 +10,12 @@ import ProtectedRoute from "@/routes/ProtectedRoute";
 import Menu from "@/pages/Menu";
 import RoleRoute from "@/routes/RoleRoute";
 import Forbidden from "@/pages/ErrorPage/Forbidden";
-import NotFound from "./pages/ErrorPage/NotFound";
-import User from "./pages/Users/User";
+import NotFound from "@/pages/ErrorPage/NotFound";
+import User from "@/pages/Users/User";
+import CreateUser from "@/pages/Users/CreateUser";
+import { PATH } from "@/routes/path";
+import { Toaster } from "sonner";
+import EditUser from "@/pages/Users/EditUser";
 
 function App() {
   const { user, authLoading } = useAuth();
@@ -22,33 +26,29 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-right" richColors closeButton />
+
       <Router>
         <ScrollToTop />
         <Routes>
           {/* User Login */}
           <Route element={<ProtectedRoute />}>
-            <Route index path="/403" element={<Forbidden />} />
+            <Route path={PATH.FORBIDDEN} element={<Forbidden />} />
 
             <Route element={<AppLayout />}>
-              <Route index path="/" element={<Dashboard />} />
+              <Route index path={PATH.DASHBOARD} element={<Dashboard />} />
 
-              <Route
-                path="/users"
-                element={
-                  <RoleRoute roles={["super-admin", "admin"]}>
-                    <User />
-                  </RoleRoute>
-                }
-              />
+              {/* Super Admin */}
+              <Route element={<RoleRoute roles={["super-admin"]} />}>
+                <Route path={PATH.USERS} element={<User />} />
+                <Route path={PATH.USERS_CREATE} element={<CreateUser />} />
+                <Route path={PATH.USERS_EDIT_PATTERN} element={<EditUser />} />
+              </Route>
 
-              <Route
-                path="/menu"
-                element={
-                  <RoleRoute roles={["admin"]}>
-                    <Menu />
-                  </RoleRoute>
-                }
-              />
+              {/* Admin */}
+              <Route element={<RoleRoute roles={["admin"]} />}>
+                <Route path={PATH.MENU} element={<Menu />} />
+              </Route>
             </Route>
 
             <Route path="*" element={<NotFound />} />
@@ -57,7 +57,7 @@ function App() {
           {/* Guest */}
           <Route element={<GuestRoute />}>
             <Route
-              path="/login"
+              path={PATH.LOGIN}
               element={user ? <Navigate to="/" replace /> : <Login />}
             />
           </Route>

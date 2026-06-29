@@ -167,6 +167,7 @@ layer(base);
   --z-index-999: 999;
   --z-index-9999: 9999;
   --z-index-99999: 99999;
+  --z-index-111111: 111111;
   --z-index-999999: 999999;
 }
 
@@ -191,7 +192,7 @@ layer(base);
     cursor: pointer;
   }
   body {
-    @apply relative font-normal font-outfit z-1 bg-gray-50;
+    @apply relative font-normal font-outfit z-1 bg-gray-50 dark:bg-gray-900;
   }
 }
 

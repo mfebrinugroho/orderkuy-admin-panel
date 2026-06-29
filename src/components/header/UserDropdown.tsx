@@ -4,6 +4,7 @@ import { Dropdown } from "@/components/ui/dropdown/Dropdown";
 import { useNavigate } from "react-router";
 import { logout } from "@/services/authApi";
 import { useAuth } from "@/hooks/useAuth";
+import { PATH } from "@/routes/path";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function UserDropdown() {
 
       setUser(null);
 
-      navigate("/login");
+      navigate(PATH.LOGIN);
     }
   };
 
